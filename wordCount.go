@@ -2,38 +2,29 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
-func wordCount(s string) map[string]int {
-	ss := strings.Split(s, " ")
-	fmt.Println(ss)
-	visited := make(map[string]bool)
+func wordCount(inputString string) map[string]int {
+	words := strings.Fields(inputString)
+	fmt.Println(words)
 	result := make(map[string]int)
-	for _, item := range ss {
-		if visited[item] == true || item==""{
-			continue
-		} else {
-			visited[item] = true
-			c:=countSubString(item,ss)
-			result[item] = c
+	for _, word := range words {
+		_, isExist := result[word]
+		if isExist{
+			result[word]+=1
+		}else{
+			result[word] = 1
 		}
 	}
 	return result
 }
 
-func countSubString(s string, ss []string) int {
-	k:=0
-	for _,item := range ss{
-		if item == s{
-			k++
-		}
-	}
-	return k
-}
-
 func main() {
-	m := wordCount(" as sa as fe we e e e")
+	argsWithProg := os.Args[1:]
+	inputString:=strings.Join(argsWithProg," ")
+	m := wordCount(inputString)
 	fmt.Println(m)
 }
 

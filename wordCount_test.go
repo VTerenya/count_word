@@ -1,17 +1,19 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestWordCount(t *testing.T) {
 	
 	// Arrange
 	
 	testTable := []struct {
-		s        string
-		expected map[string]int
+		inputString string
+		expected    map[string]int
 	}{
 		{
-			s: " as sa as fe we e e e",
+			inputString: " as sa as fe we e e e",
 			expected: map[string]int{
 				"as": 2,
 				"sa": 1,
@@ -21,13 +23,13 @@ func TestWordCount(t *testing.T) {
 			},
 		},
 		{
-			s: "aaaaa",
+			inputString: "aaaaa",
 			expected: map[string]int{
 				"aaaaa": 1,
 			},
 		},
 		{
-			s: "a1 a2 a3",
+			inputString: "a1 a2 a3",
 			expected: map[string]int{
 				"a1": 1,
 				"a2": 1,
@@ -35,7 +37,7 @@ func TestWordCount(t *testing.T) {
 			},
 		},
 		{
-			s: "1 1 asda w w w w ewqeqwe e e e e      d d d ",
+			inputString: "1 1 asda w w w w ewqeqwe e e e e      d d d ",
 			expected: map[string]int{
 				"1": 2,
 				"asda": 1,
@@ -50,9 +52,9 @@ func TestWordCount(t *testing.T) {
 	// Act
 	
 	for _, testCase := range testTable{
-		result := wordCount(testCase.s)
+		result := wordCount(testCase.inputString)
 		t.Logf("Calling func(%#v)\n\t\t result %#v\n",
-			testCase.s, result)
+			testCase.inputString, result)
 
 		// Assert
 		if len(result) != len(testCase.expected) {
